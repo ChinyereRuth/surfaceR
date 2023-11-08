@@ -76,6 +76,8 @@ devtools::document()
 devtools::check()
 
 # This command will build the package
+install.packages("devtools")
+library(devtools)
 devtools::build()
 
 # Create a README file for your repository. Edit the file as appropriate AND KNIT.
