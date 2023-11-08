@@ -1,0 +1,53 @@
+---
+title: "Slope and aspect creation with DEM"
+---
+
+I have a DEM file which is a tiff foramt type acquired for North Western Territory in Canada for the year 2023.
+
+The name of the data is `NWT- 2023-DEM.tif` and it contains a raster image and source note for NWT- 2023-DEM.tif
+
+
+To make it easy to share this dataset I will read it, convert it to an `.RData` file, and then document it so that it can be bundled with package `packr`.
+
+Load the packages needed to preprocess the data:
+```{r}
+# install.packages("raster")
+# library(raster)
+
+```
+
+Read the raster data:
+```{r}
+elevation_raster <- raster("/Users/chinyereottah/Desktop/surfaceR/data-raw/NWT-2023-DEM.tif")
+```
+
+Get a summary of the raster:
+```{r}
+summary(elevation_raster)
+```
+
+
+The source for these data are as follow:
+
+- 2023 DEM of NWT, Canada :Chttps://search.earthdata.nasa.gov/search/?fi=ASTER
+
+
+In addition, I want to fill the DEM. Filling a DEM when working with rasr data ensures that the  ensure that the elevation data is continuous and there are no missing values. 
+```{r}
+elevation_raster <- raster("/Users/chinyereottah/Desktop/surfaceR/data-raw/NWT-2023-DEM.tif")
+# Check if there are any NAs (missing values) in the DEM
+has_nas <- any(is.na(values(elevation_raster)))
+
+if (has_nas) {
+  # Fill the gaps using a simple interpolation method (linear interpolation)
+  filled_dem <- fillRaster(elevation_raster, method = "bilinear")
+} else {
+  filled_dem <- elevation_raster
+}
+```
+
+Save to data folder:
+```{r}
+writeRaster(elevation_raster, filename = "NWT-2023-DEMfill.tif", format = "GTiff")
+
+```
