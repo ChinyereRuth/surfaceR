@@ -4,7 +4,7 @@ Version: 4.3.1
 Authors@R: 
     person("Chinyere", "Ottah", , "chinyere.ottah@example.com", role = c("aut", "cre"),
            comment = c(ORCID = "YOUR-ORCID-ID"))
-Description:  A package for deriving slope and aspect using Digital Elevation Models (DEMs) in R.
+Description: A package for deriving slope and aspect using Digital Elevation Models (DEMs) in R.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
@@ -21,4 +21,5 @@ Suggests:
     rmarkdown
 VignetteBuilder: knitr
 Imports: 
-    surfaceR
+    sp,
+    raster
