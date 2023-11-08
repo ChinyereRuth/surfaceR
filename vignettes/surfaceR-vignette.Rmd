@@ -5,93 +5,82 @@ vignette: >
   %\VignetteIndexEntry{surfaceR-vignette}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+author: "Chinyere Ottah"
+date: "07 November 2023"
 ---
-Chinyere Ottah
-07 November 2023
 
 # Introduction
- SurfaceR is a package for deriving slope and aspect using a  Digital Elevation Models (DEM) in R. TSlope and      aspect influences fire behavior and so this variables are very important when assessing fire disturbance. 
- 
- Steep slopes increases the spread of fire as fires tends to progress from uphill becassue the heat and flames aleady heated up the vegetation as the fire moves uphill so it is easy for them to burn and spread. For aspect, we can use this factor to determine the direction of slope. South facing slopes are known to have more sunlight especially within the northern hemisphere, therefore making the fuels drier and susceptible to burning. Therefore, surfaceR package will be very useful for assessing fire disturbances including emissions and other standing and non standing disturbances. 
- 
-This vignette provides an illustration of how surfaceR can be used for surface analsysis follwing applications in the North Western Territories of Canada folling fire. From a provided digotal elvation model for NWT (aster), surfaceR is used to calculate slope and aspect and extract values for statistical modelling and predictions follwing fire .
+SurfaceR is a package for deriving slope and aspect using Digital Elevation Models (DEMs) in R. Slope and aspect influence fire behavior, making these variables crucial when assessing fire disturbances.
 
+Steep slopes increase the spread of fire as fires tend to progress uphill because the heat and flames have already heated up the vegetation as the fire moves uphill, making it easier for them to burn and spread. Aspect can be used to determine the direction of the slope. South-facing slopes tend to have more sunlight, especially within the northern hemisphere, making the fuels drier and more susceptible to burning. Therefore, the surfaceR package is very useful for assessing fire disturbances, including emissions and other standing and non-standing disturbances.
+
+This vignette provides an illustration of how surfaceR can be used for surface analysis following applications in the North Western Territories of Canada following a fire. From a provided digital elevation model for NWT (aster), surfaceR is used to calculate slope and aspect and extract values for statistical modeling and predictions following a fire.
 
 # The surfaceR Package
-The surfaceR can be considered a collection of two terrain surface outputs. This includes:
+The surfaceR package provides two terrain surface outputs:
 
--  Slope:  The slope provides an indication of the steepness and inclination of a surface area 
--  Aspect: The aspect talks about the direction of the slope and it usually measured in degeres. This could be North, east, west and south. Values of 0° represents the north, 90° degree represents the east, 180° represents the south while the west is for values of 270°.
+- **Slope:** Indicates the steepness and inclination of a surface area.
+- **Aspect:** Describes the direction of the slope and is measured in degrees (North, East, West, and South).
 
+## Initializing the surfaceR Geoprocessing Environment
+Before installing the surfaceR package, you need to make sure that you have the `raster` package. You can install it with the following commands:
 
-Initializing the surfaceR Geoprocessing Environment
-
-Before installing the surface R package, you need to make sure that you have the R raster packing. This can  achieved using the following command line: 
 ```{r}
 #install.packages("raster")
 #library(raster)
 ```
 
 #Installing the Package
-
-Before using the calculate slope and aspect function, you'll need to install and load the "surfaceR" package. You can do this using the following commands:
+Before using the calculate_slope_aspect function, you'll need to install and load the "surfaceR" package. You can do this using the following commands:
 
 ```{r}
-# devtools::install_github("ChinyererRuth/surfaceR") 
-# library(surfaceR)
+# Install and load the 'surfaceR' package
+devtools::install_github("ChinyereRuth/surfaceR")
+library(surfaceR)
 ```
-## Using calculate_slope_aspect
-The calculate_slope_aspect function uses a DEM as their inputs and returns both the slope and aspect rasters. For instance, aspect and  slope can be derived from a DEM using the command line below.
 
-First, read your DEM data 
+# Using calculate_slope_aspect
+The calculate_slope_aspect function uses a DEM as its input and returns both the slope and aspect rasters. For instance, aspect and slope can be be derived from a DEM using the command line below.
+First, read your DEM data:
 
 ```{r}
 # Load the 'raster' package
 library(raster)
 elevation_raster <- raster("/Users/chinyereottah/Desktop/surfaceR/inst/extdata/NWT-2023-DEMfill.tif")
 ```
+Where:
 
-Where
-- elevation_raster refers to the name of the object holding the raster data  
+elevation_raster refers to the name of the object holding the raster data.
+<- is the assignment operator in R.
+raster() is a function from the raster package that is used to read the DEM file, which is a raster.
+"/path/to/your/DEM.tif" refers to the path where the DEM data you want to read is.
 
-<-: This is the assignment operator in R. 
-
-raster() is a function form the raster package that is used to read the DEM file which is a raster
-
-"/path/to/your/DEM.tif":This refres to the path where the DEM data you want to read is
-
-# Calculate slope and aspect
+#Calculate Slope and Aspect
 The next step is to calculate slope and aspect using the calculate_slope_aspect function.
 
 ```{r}
 # Load the 'surfaceR' package
-browseVignettes("surfaceR")
 library(surfaceR)
 result <- calculate_slope_aspect(elevation_raster)
 
 ```
-In the function above, 
+In the function above:
 
-calculate_slope_aspect is the function that is called from the surfaceR package. This function can calculate aspect and slope using a DEM. 
+calculate_slope_aspect is the function that is called from the surfaceR package. This function can calculate aspect and slope using a DEM.
+elevation_raster is the elevation data that is being passed as an argument to compute aspect and slope.
 
-
-elevation_raster is the elevation data  that is being passed as an argument to compute aspect and slope.
-
-result <- is assigned to the calculate slope and aspect function, However, you can call this any name that suits your analysis.Please note that whaever the variable slope_aspect function returns back will be known as result.  
-
-
-# Access the slope and aspect rasters
-The slope and apsect can be accessed using the command below:
+#Access the Slope and Aspect Rasters
+The slope and aspect can be accessed using the following command:
 ```{r}
 slope_raster <- result$slope
 aspect_raster <- result$aspect
+
 ```
-where slope_raster are aissgned vales stored in  result$slope and raspect_raster are assigned values stored in result$aspect.
-
-
+Where slope_raster is assigned values stored in result$slope, and aspect_raster is assigned values stored in result$aspect
 
 # Visualizing the Results
-The plot function can be used to visualize the result using the code below 
+The plot function can be used to visualize the results using the code below:
+
 ```{r}
 # Plot the slope raster
 plot(slope_raster, main = "Slope")
@@ -101,11 +90,18 @@ plot(aspect_raster, main = "Aspect")
 
 ```
 
-# Interpreting the Results
-After plotting the results, we see the output for the slope and aspect raster. The slope_raster contains information about slope for the area in degrees, while the aspect_raster contains values about the direction of the slope in degrees.
+#Interpreting the Results
+After plotting the results, we see the output for the slope and aspect raster. The slope_raster contains information about the slope for the area in degrees, while the aspect_raster contains values about the direction of the slope in degrees.
 
-# Conclusion
+#Conclusion
+With the calculate_slope_aspect function in surfaceR, slope and aspect can be easily computed just by using the DEM model as input. Information about slope and aspect is very important for fire modeling and carbon emission modeling improvements and accounting.
 
-With the calculate_slope_aspect function in surfaceR, slope and aspect can be easily be computed just by using the DEM model as input. Information about slope and aspect is very imnportnat for fire modelling and carbon emission modelling improvements and accounting.
+```{r}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+library(surfaceR)
 
+```
 

@@ -1,10 +1,10 @@
 Package: surfaceR
-Title: What the Package Does (One Line, Title Case)
+Title: Deriving Slope and Aspect from DEM
 Version: 4.3.1
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
+    person("Chinyere", "Ottah", , "chinyere.ottah@example.com", role = c("aut", "cre"),
            comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
+Description:  A package for deriving slope and aspect using Digital Elevation Models (DEMs) in R.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
