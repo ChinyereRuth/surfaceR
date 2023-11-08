@@ -46,6 +46,8 @@ The calculate_slope_aspect function uses a DEM as their inputs and returns both 
 First, read your DEM data 
 
 ```{r}
+# Load the 'raster' package
+library(raster)
 elevation_raster <- raster("/Users/chinyereottah/Desktop/surfaceR/inst/extdata/NWT-2023-DEMfill.tif")
 ```
 
@@ -62,6 +64,9 @@ raster() is a function form the raster package that is used to read the DEM file
 The next step is to calculate slope and aspect using the calculate_slope_aspect function.
 
 ```{r}
+# Load the 'surfaceR' package
+browseVignettes("surfaceR")
+library(surfaceR)
 result <- calculate_slope_aspect(elevation_raster)
 
 ```
