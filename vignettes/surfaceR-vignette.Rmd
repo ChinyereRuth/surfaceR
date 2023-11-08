@@ -28,8 +28,8 @@ Initializing the surfaceR Geoprocessing Environment
 
 Before installing the surface R package, you need to make sure that you have the R raster packing. This can  achieved using the following command line: 
 ```{r}
-install.packages("raster")
-# library(raster)
+#install.packages("raster")
+#library(raster)
 ```
 
 #Installing the Package
@@ -43,7 +43,8 @@ Before using the calculate slope and aspect function, you'll need to install and
 ## Using calculate_slope_aspect
 The calculate_slope_aspect function uses a DEM as their inputs and returns both the slope and aspect rasters. For instance, aspect and  slope can be derived from a DEM using the command line below.
 
-First, lad your DEM data 
+First, read your DEM data 
+
 ```{r}
 elevation_raster <- raster("/Users/chinyereottah/Desktop/surfaceR/inst/extdata/NWT-2023-DEMfill.tif")
 ```
